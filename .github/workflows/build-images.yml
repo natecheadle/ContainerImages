@@ -16,9 +16,9 @@ jobs:
         os: ["ubuntu-latest", "windows-latest"]
         include:
         - os: "ubuntu-latest"
-          image: "ubuntu-latest-llvm13.dockerfile"
+          image: "ubuntu-latest-llvm13"
         - os: "windows-latest"
-          image: "windows-latest-llvm13.dockerfile"
+          image: "windows-latest-llvm13"
     permissions:
       contents: read
       packages: write
@@ -34,7 +34,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build and Push Base Docker image
         run: |
-          docker build -f ${{matrix.image}} -t ${{ env.REGISTRY }}/${{matrix.image}}:latest -m 2GB . &&
+          docker build -f ${{matrix.image}}.dockerfile -t ${{ env.REGISTRY }}/${{matrix.image}}:latest -m 2GB . &&
           docker push ${{ env.REGISTRY }}/${{matrix.image}}:latest
+
+      - name: Build and Push vcpkg Docker Image
+        run: |
+          docker build -f ${{matrix.image}}-vcpkg.dockerfile -t ${{ env.REGISTRY }}/${{matrix.image}}-vcpkg:latest -m 2GB . &&
+          docker push ${{ env.REGISTRY }}/${{matrix.image}}-vcpkg:latest
+  
