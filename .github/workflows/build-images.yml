@@ -14,7 +14,6 @@ jobs:
     strategy:
       matrix:
         os: ["ubuntu-latest", "windows-latest"]
-        type: ["DEBUG", "RELEASE"]
         include:
         - os: "ubuntu-latest"
           image: "ubuntu-latest-llvm13.dockerfile"
