@@ -36,4 +36,5 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -f ${{matrix.image}} -t ${{ env.REGISTRY }}/${{matrix.image}}:latest -m 2GB .
+          docker build -f ${{matrix.image}} -t ${{ env.REGISTRY }}/${{matrix.image}}:latest -m 2GB . &&
+          docker push ${{ env.REGISTRY }}/${{matrix.image}}:latest
