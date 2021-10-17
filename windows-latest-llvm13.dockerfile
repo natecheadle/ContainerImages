@@ -31,5 +31,3 @@ RUN C:\Temp\vs_buildtools.exe `
     --add Microsoft.VisualStudio.Workload.VCTools;includeRecommended `
     --add Microsoft.Component.MSBuild `
  || IF "%ERRORLEVEL%"=="3010" EXIT 0
-
-CMD [ "powershell" ]
